@@ -1,14 +1,10 @@
 import React from 'react'
-import { AbstractConnector } from '@web3-react/abstract-connector'
 import { Web3ReactProvider, useWeb3React, UnsupportedChainIdError } from '@web3-react/core'
 import {
   NoEthereumProviderError,
   UserRejectedRequestError as UserRejectedRequestErrorInjected
 } from '@web3-react/injected-connector'
-import {
-  URI_AVAILABLE,
-  UserRejectedRequestError as UserRejectedRequestErrorWalletConnect
-} from '@web3-react/walletconnect-connector'
+import { UserRejectedRequestError as UserRejectedRequestErrorWalletConnect } from '@web3-react/walletconnect-connector'
 import { UserRejectedRequestError as UserRejectedRequestErrorFrame } from '@web3-react/frame-connector'
 import { Web3Provider } from '@ethersproject/providers'
 import { formatEther } from '@ethersproject/units'
@@ -26,23 +22,41 @@ import {
   fortmatic,
   portis,
   squarelink,
-  torus
+  torus,
+  mewconnect
 } from '../connectors'
 import { Spinner } from '../components/Spinner'
 
-const connectorsByName: { [name: string]: AbstractConnector } = {
-  Injected: injected,
-  Network: network,
-  WalletConnect: walletconnect,
-  WalletLink: walletlink,
-  Ledger: ledger,
-  Trezor: trezor,
-  Frame: frame,
-  Authereum: authereum,
-  Fortmatic: fortmatic,
-  Portis: portis,
-  Squarelink: squarelink,
-  Torus: torus
+enum ConnectorNames {
+  Injected = 'Injected',
+  Network = 'Network',
+  WalletConnect = 'WalletConnect',
+  WalletLink = 'WalletLink',
+  Ledger = 'Ledger',
+  Trezor = 'Trezor',
+  Frame = 'Frame',
+  Authereum = 'Authereum',
+  Fortmatic = 'Fortmatic',
+  Portis = 'Portis',
+  Squarelink = 'Squarelink',
+  Torus = 'Torus',
+  MewConnect = 'MEWconnect'
+}
+
+const connectorsByName: { [connectorName in ConnectorNames]: any } = {
+  [ConnectorNames.Injected]: injected,
+  [ConnectorNames.Network]: network,
+  [ConnectorNames.WalletConnect]: walletconnect,
+  [ConnectorNames.WalletLink]: walletlink,
+  [ConnectorNames.Ledger]: ledger,
+  [ConnectorNames.Trezor]: trezor,
+  [ConnectorNames.Frame]: frame,
+  [ConnectorNames.Authereum]: authereum,
+  [ConnectorNames.Fortmatic]: fortmatic,
+  [ConnectorNames.Portis]: portis,
+  [ConnectorNames.Squarelink]: squarelink,
+  [ConnectorNames.Torus]: torus,
+    [ConnectorNames.MewConnect]: mewconnect
 }
 
 function getErrorMessage(error: Error) {
@@ -85,7 +99,7 @@ function ChainId() {
       <span role="img" aria-label="chain">
         ⛓
       </span>
-      <span>{Number.isInteger(chainId) ? chainId : ''}</span>
+      <span>{chainId ?? ''}</span>
     </>
   )
 }
@@ -130,15 +144,7 @@ function BlockNumber() {
       <span role="img" aria-label="numbers">
         🔢
       </span>
-      <span>
-        {Number.isInteger(blockNumber)
-          ? blockNumber.toLocaleString()
-          : blockNumber === null
-          ? 'Error'
-          : !!library
-          ? '...'
-          : ''}
-      </span>
+      <span>{blockNumber === null ? 'Error' : blockNumber ?? ''}</span>
     </>
   )
 }
@@ -153,11 +159,11 @@ function Account() {
         🤖
       </span>
       <span>
-        {account === undefined
-          ? ''
-          : account === null
+        {account === null
           ? '-'
-          : `${account.substring(0, 6)}...${account.substring(account.length - 4)}`}
+          : account
+          ? `${account.substring(0, 6)}...${account.substring(account.length - 4)}`
+          : ''}
       </span>
     </>
   )
@@ -197,17 +203,7 @@ function Balance() {
       <span role="img" aria-label="gold">
         💰
       </span>
-      <span>
-        {!!balance
-          ? `Ξ${parseFloat(formatEther(balance)).toPrecision(4)}`
-          : balance === null
-          ? 'Error'
-          : account === null
-          ? '-'
-          : !!account && !!library
-          ? '...'
-          : ''}
-      </span>
+      <span>{balance === null ? 'Error' : balance ? `Ξ${formatEther(balance)}` : ''}</span>
     </>
   )
 }
@@ -242,7 +238,7 @@ function App() {
   const { connector, library, chainId, account, activate, deactivate, active, error } = context
 
   // handle logic to recognize the connector currently being activated
-  const [activatingConnector, setActivatingConnector] = React.useState<AbstractConnector>()
+  const [activatingConnector, setActivatingConnector] = React.useState<any>()
   React.useEffect(() => {
     if (activatingConnector && activatingConnector === connector) {
       setActivatingConnector(undefined)
@@ -368,7 +364,7 @@ function App() {
             Sign Message
           </button>
         )}
-        {!!(connector === network && chainId) && (
+        {!!(connector === connectorsByName[ConnectorNames.Network] && chainId) && (
           <button
             style={{
               height: '3rem',
@@ -382,7 +378,7 @@ function App() {
             Switch Networks
           </button>
         )}
-        {connector === walletconnect && (
+        {connector === connectorsByName[ConnectorNames.WalletConnect] && (
           <button
             style={{
               height: '3rem',
@@ -396,7 +392,21 @@ function App() {
             Kill WalletConnect Session
           </button>
         )}
-        {connector === walletlink && (
+          {connector === connectorsByName[ConnectorNames.MewConnect] && (
+              <button
+                  style={{
+                      height: '3rem',
+                      borderRadius: '1rem',
+                      cursor: 'pointer'
+                  }}
+                  onClick={() => {
+                      ;(connector as any).close()
+                  }}
+              >
+                  Kill MewConnect Session
+              </button>
+          )}
+        {connector === connectorsByName[ConnectorNames.WalletLink] && (
           <button
             style={{
               height: '3rem',
@@ -410,7 +420,7 @@ function App() {
             Kill WalletLink Session
           </button>
         )}
-        {connector === fortmatic && (
+        {connector === connectorsByName[ConnectorNames.Fortmatic] && (
           <button
             style={{
               height: '3rem',
@@ -424,7 +434,7 @@ function App() {
             Kill Fortmatic Session
           </button>
         )}
-        {connector === portis && (
+        {connector === connectorsByName[ConnectorNames.Portis] && (
           <>
             {chainId !== undefined && (
               <button
@@ -454,7 +464,7 @@ function App() {
             </button>
           </>
         )}
-        {connector === torus && (
+        {connector === connectorsByName[ConnectorNames.Torus] && (
           <button
             style={{
               height: '3rem',

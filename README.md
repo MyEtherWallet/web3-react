@@ -29,7 +29,8 @@ _A simple, maximally extensible, dependency minimized framework for building mod
 | `@web3-react/fortmatic-connector`     | [![npm version](https://img.shields.io/npm/v/@web3-react/fortmatic-connector/latest.svg)](https://www.npmjs.com/package/@web3-react/fortmatic-connector/v/latest)         | [![minzip](https://img.shields.io/bundlephobia/minzip/@web3-react/fortmatic-connector/latest.svg)](https://bundlephobia.com/result?p=@web3-react/fortmatic-connector@latest)         | [Fortmatic](https://fortmatic.com/) Connector                                       |
 | `@web3-react/portis-connector`        | [![npm version](https://img.shields.io/npm/v/@web3-react/portis-connector/latest.svg)](https://www.npmjs.com/package/@web3-react/portis-connector/v/latest)               | [![minzip](https://img.shields.io/bundlephobia/minzip/@web3-react/portis-connector/latest.svg)](https://bundlephobia.com/result?p=@web3-react/portis-connector@latest)               | [Portis](https://www.portis.io/) Connector                                          |
 | `@web3-react/squarelink-connector`    | [![npm version](https://img.shields.io/npm/v/@web3-react/squarelink-connector/latest.svg)](https://www.npmjs.com/package/@web3-react/squarelink-connector/v/latest)       | [![minzip](https://img.shields.io/bundlephobia/minzip/@web3-react/squarelink-connector/latest.svg)](https://bundlephobia.com/result?p=@web3-react/squarelink-connector@latest)       | [Squarelink](https://squarelink.com/) Connector                                     |
-| `@web3-react/torus-connector`         | [![npm version](https://img.shields.io/npm/v/@web3-react/torus-connector/latest.svg)](https://www.npmjs.com/package/@web3-react/torus-connector/v/latest)                 | [![minzip](https://img.shields.io/bundlephobia/minzip/@web3-react/torus-connector/latest.svg)](https://bundlephobia.com/result?p=@web3-react/torus-connector@latest)                 | [Torus](https://tor.us/) Connector                                                  |
+| `@web3-react/torus-connector`         | [![npm version](https://img.shields.io/npm/v/@web3-react/torus-connector/latest.svg)](https://www.npmjs.com/package/@web3-react/torus-connector/v/latest)                 | [![minzip](https://img.shields.io/bundlephobia/minzip/@web3-react/torus-connector/latest.svg)](https://bundlephobia.com/result?p=@web3-react/torus-connector@latest)                 | [Torus](https://tor.us/) Connector 
+| `@myetherwallet/mewconnect-connector`         | [![npm version](https://img.shields.io/npm/v/@myetherwallet/mewconnect-connector/latest.svg)](https://www.npmjs.com/package/@myetherwallet/mewconnect-connector/v/latest)                 | [![minzip](https://img.shields.io/bundlephobia/minzip/@myetherwallet/mewconnect-connector/latest.svg)](https://bundlephobia.com/result?p=@myetherwallet/mewconnect-connector@latest)                 | [MEWconnect](https://mewconnect.myetherwallet.com/) Connector|
 | 🐉 **Low-Level**                      |
 | `@web3-react/abstract-connector`      | [![npm version](https://img.shields.io/npm/v/@web3-react/abstract-connector/latest.svg)](https://www.npmjs.com/package/@web3-react/abstract-connector/v/latest)           | [![minzip](https://img.shields.io/bundlephobia/minzip/@web3-react/abstract-connector/latest.svg)](https://bundlephobia.com/result?p=@web3-react/abstract-connector@latest)           | Shared Connector Class                                                              |
 | `@web3-react/types`                   | [![npm version](https://img.shields.io/npm/v/@web3-react/types/latest.svg)](https://www.npmjs.com/package/@web3-react/types/v/latest)                                     | [![minzip](https://img.shields.io/bundlephobia/minzip/@web3-react/types/latest.svg)](https://bundlephobia.com/result?p=@web3-react/types@latest)                                     | Shared [TypeScript](https://www.typescriptlang.org/) Types                          |
@@ -45,11 +46,13 @@ _A simple, maximally extensible, dependency minimized framework for building mod
 _Open a PR to add your project to the list!_
 
 - [Uniswap.exchange](https://github.com/Uniswap/uniswap-frontend)
+- [hypertext.finance](https://github.com/NoahZinsmeister/hypertext)
 - [useWallet](https://github.com/aragon/use-wallet)
 - [Terminal](https://blog.terminal.co/web3-react-integration/)
 - [Everest](https://github.com/metacartel/everest-web-app)
 - [NFT Scribe](https://github.com/conlan/nft-scribe)
 - [Compound Liquidator](https://github.com/conlan/compound-liquidator)
+- [wildcards.world](https://github.com/wildcards-world/ui)
 
 ## Related Efforts
 

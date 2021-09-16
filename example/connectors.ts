@@ -10,6 +10,7 @@ import { FortmaticConnector } from '@web3-react/fortmatic-connector'
 import { PortisConnector } from '@web3-react/portis-connector'
 import { SquarelinkConnector } from '@web3-react/squarelink-connector'
 import { TorusConnector } from '@web3-react/torus-connector'
+import { MewConnectConnector } from '@myetherwallet/mewconnect-connector'
 
 const POLLING_INTERVAL = 12000
 const RPC_URLS: { [chainId: number]: string } = {
@@ -21,8 +22,7 @@ export const injected = new InjectedConnector({ supportedChainIds: [1, 3, 4, 5, 
 
 export const network = new NetworkConnector({
   urls: { 1: RPC_URLS[1], 4: RPC_URLS[4] },
-  defaultChainId: 1,
-  pollingInterval: POLLING_INTERVAL
+  defaultChainId: 1
 })
 
 export const walletconnect = new WalletConnectConnector({
@@ -35,6 +35,10 @@ export const walletconnect = new WalletConnectConnector({
 export const walletlink = new WalletLinkConnector({
   url: RPC_URLS[1],
   appName: 'web3-react example'
+})
+
+export const mewconnect = new MewConnectConnector({
+  url: RPC_URLS[1]
 })
 
 export const ledger = new LedgerConnector({ chainId: 1, url: RPC_URLS[1], pollingInterval: POLLING_INTERVAL })
